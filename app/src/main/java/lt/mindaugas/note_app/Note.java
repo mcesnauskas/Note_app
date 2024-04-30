@@ -23,17 +23,6 @@ public class Note {
         this.creationDate = LocalDateTime.now();
         this.updateDate = LocalDateTime.now();
     }
-
-    @Override
-    public String toString() {
-        return "Note{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", creationDate=" + creationDate +
-                ", updateDate=" + updateDate +
-                '}';
-    }
 }
 
 
