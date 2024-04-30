@@ -1,7 +1,9 @@
 package lt.mindaugas.note_app;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         setUpListView();
         clickOnItem(this);
+        longClickOnItem();
     }
 
     private void setUpListView() {
@@ -40,23 +43,59 @@ public class MainActivity extends AppCompatActivity {
     private void clickOnItem(Context context) {
         binding.notesListView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
+                    Log.i("my_tst", "clickOnItem");
                     Note note = (Note) adapterView.getItemAtPosition(i);
                     String message = String.format("Clicked on note with id %s", note.getId());
-//                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-                    Snackbar
-                            .make(binding.notesListView, message, Snackbar.LENGTH_LONG)
-                            .setActionTextColor(getColor(R.color.yellow))
-                            .setAction(
-                                    "OK",
-                                    v -> {
-                                        Toast
-                                                .makeText(context, "Ok clicked", Toast.LENGTH_SHORT)
-                                                .show();
-                                    }
-                            )
-                            .show();
+                    showSnackBar(message);
                 }
         );
     }
+
+    private void longClickOnItem() {
+        binding.notesListView.setOnItemLongClickListener(
+                (adapterView, view, i, l) -> {
+                    showAlertDialogOnItemRemove(i);
+                    return true;
+                }
+        );
+    }
+
+    private void showAlertDialogOnItemRemove(int position) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog
+                .setTitle("Remove note")
+                .setMessage("Are you sure you want to remove this note?")
+                .setPositiveButton(
+                        "Yes",
+                        (dialogInterface, i) -> {
+                            Repository.list.remove(position);
+                            adapter.notifyDataSetChanged();
+                        }
+                )
+                .setNegativeButton(
+                        "No",
+                        (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        }
+                )
+                .show();
+    }
+
+    private void showSnackBar(String message) {
+//            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar
+                .make(binding.notesListView, message, Snackbar.LENGTH_LONG)
+                .setActionTextColor(getColor(R.color.yellow))
+                .setAction(
+                        "OK",
+                        v -> {
+                            Toast
+                                    .makeText(this, "Ok clicked", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                )
+                .show();
+    }
 }
+

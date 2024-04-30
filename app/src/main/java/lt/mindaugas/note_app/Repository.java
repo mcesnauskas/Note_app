@@ -3,7 +3,10 @@ package lt.mindaugas.note_app;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+
 public class Repository {
+    public static ArrayList<Note> list = new ArrayList<>();
 
     public static List<String> getDaysOfWeek(){
         ArrayList<String> list = new ArrayList<>();
@@ -36,8 +39,6 @@ public class Repository {
     }
 
     public static List<Note> getNotes(int itemNo){
-        ArrayList<Note> list = new ArrayList<>();
-
         for (int i = 0; i < itemNo; i++) {
             list.add(new Note(
                     i+1,
