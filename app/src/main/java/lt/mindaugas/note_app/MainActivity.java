@@ -22,14 +22,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ArrayList<String> list = new ArrayList<>();
-        list.addAll(Repository.getDaysOfWeek());
-        list.addAll(Repository.getMonths());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+        ArrayAdapter<Note> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                list
+                Repository.getNotes(20)
         );
 
         binding.notesListView.setAdapter(adapter);
