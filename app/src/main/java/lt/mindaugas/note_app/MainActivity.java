@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 
 import lt.mindaugas.note_app.databinding.ActivityMainBinding;
@@ -45,7 +47,19 @@ public class MainActivity extends AppCompatActivity {
                 (adapterView, view, i, l) -> {
                     Note note = (Note) adapterView.getItemAtPosition(i);
                     String message = String.format("Clicked on note with id %s", note.getId());
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+                    Snackbar
+                            .make(binding.notesListView, message, Snackbar.LENGTH_LONG)
+                            .setActionTextColor(getColor(R.color.yellow))
+                            .setAction(
+                                    "OK",
+                                    v -> {
+                                        Toast.makeText(context, "Ok clicked", Toast.LENGTH_SHORT).show();
+                                    }
+                            )
+                            .show();
+
                 }
         );
     }
