@@ -6,20 +6,23 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import lt.mindaugas.note_app.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        final TextView textViewHello = findViewById(R.id.textViewHello);
-        final View constraintLayout = findViewById(R.id.main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        constraintLayout.setBackgroundColor(getColor(R.color.yellow));
-        textViewHello.setTextSize(30f);
-        textViewHello.setTextColor(getColor(R.color.navy));
-        textViewHello.setText("Sveikas Pasauli!!!!!! ☻");
+        binding.main.setBackgroundColor(getColor(R.color.yellow));
+        binding.textViewHello.setTextSize(30f);
+        binding.textViewHello.setTextColor(getColor(R.color.navy));
+        binding.textViewHello.setText("Sveikas Pasauli!!!!!! ☻");
 
     }
 }
