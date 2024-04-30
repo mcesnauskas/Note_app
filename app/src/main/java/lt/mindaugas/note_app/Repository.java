@@ -34,4 +34,18 @@ public class Repository {
 
         return list;
     }
+
+    public static List<Note> getNotes(int itemNo){
+        ArrayList<Note> list = new ArrayList<>();
+
+        for (int i = 0; i < itemNo; i++) {
+            list.add(new Note(
+                    i+1,
+                    "Note " + (i+1),
+                    "Description " + (i+1)
+            ));
+        }
+
+        return list;
+    }
 }
