@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -28,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         setUpListView();
         clickOnItem(this);
         longClickOnItem();
+        clickOnFab();
+    }
+
+    private void clickOnFab() {
+        binding.addNoteButton.setOnClickListener(
+                view -> Toast
+                        .makeText(this, "Hello", Toast.LENGTH_LONG)
+                        .show()
+        );
     }
 
     private void setUpListView() {
