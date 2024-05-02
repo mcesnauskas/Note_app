@@ -2,6 +2,8 @@ package lt.mindaugas.note_app;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,14 +34,6 @@ public class MainActivity extends AppCompatActivity {
         clickOnFab();
     }
 
-    private void clickOnFab() {
-        binding.addNoteButton.setOnClickListener(
-                view -> Toast
-                        .makeText(this, "Hello", Toast.LENGTH_LONG)
-                        .show()
-        );
-    }
-
     private void setUpListView() {
         adapter = new ArrayAdapter<>(
                 this,
@@ -68,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
                     showAlertDialogOnItemRemove(i);
                     return true;
                 }
+        );
+    }
+
+    private void clickOnFab() {
+        binding.addNoteButton.setOnClickListener(
+//                view -> setImplicitIntent()
+                view -> setExplicitIntent()
         );
     }
 
@@ -106,6 +107,35 @@ public class MainActivity extends AppCompatActivity {
                         }
                 )
                 .show();
+    }
+
+    private void setImplicitIntent() {
+        String textMessage = "This is my special message for sharing.";
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+        sendIntent.setType("text/plain");
+
+        startActivity(sendIntent);
+    }
+
+    private void setExplicitIntent() {
+        String videoUrl = "https://www.youtube.com/watch?v=Yc2NEsxOZH0";
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl));
+        intent.putExtra("force_fullscreen", true);
+        intent.putExtra("finish_on_ended", true);
+        intent.putExtra("force_autoplay", true);
+        intent.setPackage("com.google.android.youtube");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast
+                    .makeText(this, "YouTube app is not installed", Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 }
 
