@@ -60,4 +60,9 @@ public class Repository {
                 .orElse(emptyNote);
         return note;
     }
+
+
+    public static void deleteNoteById(int noteId) {
+        list.removeIf(item -> item.getId() == noteId);
+    }
 }

@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         clickOnFab();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.notifyDataSetChanged();
+    }
+
     private void clickOnFab() {
         binding.addNoteButton.setOnClickListener(
                 view -> Toast

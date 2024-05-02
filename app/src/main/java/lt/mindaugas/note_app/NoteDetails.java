@@ -22,6 +22,39 @@ public class NoteDetails extends AppCompatActivity {
         int noteId = getIntent().getIntExtra(MainActivity.INTENT_NOTE_ID, -1);
         Note note = Repository.getNoteById(noteId);
 
+        displayNoteDetails(note);
+        clickOnButtonCancel();
+        clickOnButtonDelete(note.getId());
+        clickOnButtonSave();
+    }
+
+    private void clickOnButtonCancel() {
+        binding.cancelButton.setOnClickListener(
+                view -> finish()
+        );
+    }
+
+    private void clickOnButtonDelete(int noteId) {
+        binding.deleteButton.setOnClickListener(
+                view -> {
+                    if (noteId > 0){
+                        Repository.deleteNoteById(noteId);
+                        finish();
+                    }
+                }
+        );
+    }
+
+    private void clickOnButtonSave() {
+        binding.saveButton.setOnClickListener(
+                view -> {
+
+                }
+        );
+    }
+
+
+    private void displayNoteDetails(Note note) {
         if (note.getId() > 0){
             binding.noteIdTextView.setText(String.valueOf(note.getId()));
             binding.noteTitleEditText.setText(note.getTitle());
