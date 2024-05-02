@@ -2,6 +2,7 @@ package lt.mindaugas.note_app;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private ArrayAdapter<Note> adapter;
+    public static final String INTENT_NOTE_ID = "noteId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setUpListView();
-        clickOnItem(this);
+        clickOnItem();
         longClickOnItem();
         clickOnFab();
     }
@@ -50,14 +52,13 @@ public class MainActivity extends AppCompatActivity {
         binding.notesListView.setAdapter(adapter);
     }
 
-    private void clickOnItem(Context context) {
+    private void clickOnItem() {
         binding.notesListView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
-                    Log.i("my_tst", "clickOnItem");
                     Note note = (Note) adapterView.getItemAtPosition(i);
-                    String message = String.format("Clicked on note with id %s", note.getId());
-
-                    showSnackBar(message);
+                    Intent intent = new Intent(MainActivity.this, NoteDetails.class);
+                    intent.putExtra(INTENT_NOTE_ID, note.getId());
+                    startActivity(intent);
                 }
         );
     }
