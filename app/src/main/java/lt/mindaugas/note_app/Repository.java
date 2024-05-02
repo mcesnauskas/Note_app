@@ -49,4 +49,15 @@ public class Repository {
 
         return list;
     }
+
+    public static Note getNoteById(int noteId){
+        Note emptyNote = new Note();
+        emptyNote.setId(-1);
+        Note note = list
+                .stream()
+                .filter(item -> item.getId() == noteId)
+                .findFirst()
+                .orElse(emptyNote);
+        return note;
+    }
 }
