@@ -2,6 +2,8 @@ package lt.mindaugas.note_app;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import lt.mindaugas.note_app.databinding.ActivityMainBinding;
 
 public class MainActivity extends BaseActivity {
@@ -9,6 +11,7 @@ public class MainActivity extends BaseActivity {
     private int result = 0;
     private ActivityMainBinding binding;
     public final String TAG_MAIN_ACTIVITY = "Lifecycle_main_activity";
+    private static final String SAVE_KEY = "save key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,20 @@ public class MainActivity extends BaseActivity {
 
         setUpWidgets();
         clickOnButtonSum();
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        result = Integer.parseInt(binding.resultTextView.getText().toString());
+        outState.putInt(SAVE_KEY, result);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        result = savedInstanceState.getInt(SAVE_KEY);
+        binding.resultTextView.setText(String.valueOf(result));
     }
 
     private void setUpWidgets() {
