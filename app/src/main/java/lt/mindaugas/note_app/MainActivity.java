@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                Repository.getNotes(20)
+                notes
         );
 
         binding.notesListView.setAdapter(adapter);
@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(
                         "Yes",
                         (dialogInterface, i) -> {
-                            Repository.list.remove(position);
+                            Note note = notes.get(position);
+                            notes.removeIf(item -> item.getId() == note.getId());
+                            noteDao.delete(note);
                             adapter.notifyDataSetChanged();
                         }
                 )
