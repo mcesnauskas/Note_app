@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lt.mindaugas.note_app.databinding.ActivityMainBinding;
@@ -25,15 +26,14 @@ public class MainActivity extends AppCompatActivity {
     private NoteDao noteDao;
     public static final String INTENT_NOTE_ID = "noteId";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        notes = new ArrayList<>();
 
-        setUpLocalRepository();
         setUpListView();
         clickOnItem();
         longClickOnItem();
@@ -41,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onStart() {
+        super.onStart();
+        getNotesFromLocalRepository();
         adapter.notifyDataSetChanged();
     }
 
-    private void setUpLocalRepository() {
+    private void getNotesFromLocalRepository() {
         noteDao = MainDatabase.getInstance().noteDao();
 
         if (noteDao.getAll().isEmpty()) {
@@ -54,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
                     Repository.getNotes(10)
             );
         }
-        notes = noteDao.getAll();
+
+        notes.clear();
+        notes.addAll(noteDao.getAll());
     }
 
     private void setUpListView() {
@@ -67,14 +70,6 @@ public class MainActivity extends AppCompatActivity {
         binding.notesListView.setAdapter(adapter);
     }
 
-    private void clickOnFab() {
-        binding.addNoteButton.setOnClickListener(
-                view -> Toast
-                        .makeText(this, "Hello", Toast.LENGTH_LONG)
-                        .show()
-        );
-    }
-
     private void clickOnItem() {
         binding.notesListView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
@@ -83,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(INTENT_NOTE_ID, note.getId());
                     startActivity(intent);
                 }
+        );
+    }
+
+    private void clickOnFab() {
+        binding.addNoteButton.setOnClickListener(
+                view -> Toast
+                        .makeText(this, "Hello", Toast.LENGTH_LONG)
+                        .show()
         );
     }
 

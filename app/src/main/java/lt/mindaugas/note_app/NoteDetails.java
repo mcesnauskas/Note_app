@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 import lt.mindaugas.note_app.databinding.ActivityNoteDetailsBinding;
 import lt.mindaugas.note_app.local_repository.MainDatabase;
-import lt.mindaugas.note_app.local_repository.Repository;
 
 public class NoteDetails extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class NoteDetails extends AppCompatActivity {
 
         displayNoteDetails(note);
         clickOnButtonCancel();
-        clickOnButtonDelete(note.getId());
+        clickOnButtonDelete(note);
         clickOnButtonSave();
     }
 
@@ -36,11 +35,11 @@ public class NoteDetails extends AppCompatActivity {
         );
     }
 
-    private void clickOnButtonDelete(int noteId) {
+    private void clickOnButtonDelete(Note note) {
         binding.deleteButton.setOnClickListener(
                 view -> {
-                    if (noteId > 0){
-                        Repository.deleteNoteById(noteId);
+                    if (note.getId() > 0){
+                        MainDatabase.getInstance().noteDao().delete(note);
                         finish();
                     }
                 }
@@ -56,6 +55,7 @@ public class NoteDetails extends AppCompatActivity {
     }
 
     private void displayNoteDetails(Note note) {
+        if (note == null) return;
         if (note.getId() > 0){
             binding.noteIdTextView.setText(String.valueOf(note.getId()));
             binding.noteTitleEditText.setText(note.getTitle());
