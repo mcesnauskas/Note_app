@@ -1,5 +1,6 @@
 package lt.mindaugas.note_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     public final String TAG_MAIN_ACTIVITY = "Lifecycle_main_activity";
     private static final String SAVE_KEY = "save key";
+    public static final String INTENT_RESULT_KEY = "result_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends BaseActivity {
 
         setUpWidgets();
         clickOnButtonSum();
+        clickOnButtonOpen();
     }
 
     @Override
@@ -60,6 +63,16 @@ public class MainActivity extends BaseActivity {
                     result = Integer.parseInt(binding.editText01.getText().toString()) +
                             Integer.parseInt(binding.editText02.getText().toString());
                     binding.resultTextView.setText(String.valueOf(result));
+                }
+        );
+    }
+
+    private void clickOnButtonOpen() {
+        binding.openSecondActivityButton.setOnClickListener(
+                view -> {
+                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                    intent.putExtra(INTENT_RESULT_KEY, result);
+                    startActivity(intent);
                 }
         );
     }

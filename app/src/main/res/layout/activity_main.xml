@@ -11,10 +11,10 @@
         android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textAlignment="center"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
+        android:text="0"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/editText01"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,20 @@
         android:text="Sum"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText02" />
+
+    <Button
+        android:id="@+id/openSecondActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sumButton"
+        app:layout_constraintTop_toBottomOf="@+id/editText02" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
