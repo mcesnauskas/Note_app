@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import lt.mindaugas.note_app.databinding.ActivityNoteDetailsBinding;
+import lt.mindaugas.note_app.local_repository.MainDatabase;
 import lt.mindaugas.note_app.local_repository.Repository;
 
 public class NoteDetails extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class NoteDetails extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         int noteId = getIntent().getIntExtra(MainActivity.INTENT_NOTE_ID, -1);
-        Note note = Repository.getNoteById(noteId);
+        Note note = MainDatabase.getInstance().noteDao().getById(noteId);
 
         displayNoteDetails(note);
         clickOnButtonCancel();
@@ -53,7 +54,6 @@ public class NoteDetails extends AppCompatActivity {
                 }
         );
     }
-
 
     private void displayNoteDetails(Note note) {
         if (note.getId() > 0){
