@@ -1,9 +1,10 @@
-package lt.mindaugas.note_app;
+package lt.mindaugas.note_app.local_repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
+import lt.mindaugas.note_app.Note;
 
 public class Repository {
     public static ArrayList<Note> list = new ArrayList<>();

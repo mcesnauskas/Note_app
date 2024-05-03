@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import lt.mindaugas.note_app.databinding.ActivityNoteDetailsBinding;
+import lt.mindaugas.note_app.local_repository.Repository;
 
 public class NoteDetails extends AppCompatActivity {
 

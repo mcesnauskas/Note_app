@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    kotlin("kapt")
 }
 
 android {
@@ -38,9 +39,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.lombok)
-    annotationProcessor(libs.lombok)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // lombok
+    implementation(libs.lombok)
+    annotationProcessor(libs.lombok)
+    // Room database
+    implementation(libs.room)
+    annotationProcessor(libs.rooma)
+    testImplementation(libs.roomt)
 }
