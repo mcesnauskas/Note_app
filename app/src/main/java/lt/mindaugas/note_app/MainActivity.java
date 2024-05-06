@@ -17,6 +17,7 @@ import lt.mindaugas.note_app.databinding.ActivityMainBinding;
 import lt.mindaugas.note_app.local_repository.MainDatabase;
 import lt.mindaugas.note_app.local_repository.NoteDao;
 import lt.mindaugas.note_app.local_repository.Repository;
+import lt.mindaugas.note_app.view.NoteAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,12 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpListView() {
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                notes
-        );
-
+        adapter = new NoteAdapter(this, notes);
         binding.notesListView.setAdapter(adapter);
     }
 
@@ -123,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSnackBar(String message) {
-//            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Snackbar
                 .make(binding.notesListView, message, Snackbar.LENGTH_LONG)
                 .setActionTextColor(getColor(R.color.yellow))

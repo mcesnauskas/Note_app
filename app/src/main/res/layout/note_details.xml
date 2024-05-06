@@ -15,7 +15,7 @@
         android:layout_margin="16dp">
 
         <TextView
-            android:id="@+id/noteIdTextView"
+            android:id="@+id/itemIdTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
             tools:text="99" />
 
         <TextView
-            android:id="@+id/noteTitleTextView"
+            android:id="@+id/itemTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/yellow"
@@ -34,14 +34,14 @@
             tools:text="Note-Title" />
 
         <TextView
-            android:id="@+id/noteUpdateDateTextView"
+            android:id="@+id/itemUpdateDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noteTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/itemTitleTextView"
             tools:text="Update date: 24024-05-06 10:45:30" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
