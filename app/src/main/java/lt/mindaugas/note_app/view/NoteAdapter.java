@@ -43,7 +43,9 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             holder.id.setText(String.valueOf(note.getId()));
             holder.title.setText(note.getTitle());
             holder.updateDate.setText(
-                    "Updated: " + Util.formatDateAndTime(note.getUpdateDate())
+                    convertView.getContext().getString(
+                            R.string.updatedDate, Util.formatDateAndTime(note.getUpdateDate())
+                    )
             );
         }
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Note_app</string>
+    <string name="createdDate">Created: %s</string>
+    <string name="updatedDate">Updated: %s</string>
 </resources>

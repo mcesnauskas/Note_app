@@ -94,10 +94,10 @@ public class NoteDetails extends AppCompatActivity {
             binding.noteTitleEditText.setText(note.getTitle());
             binding.noteDescriptionEditText.setText(note.getDescription());
             binding.noteCreationDateTextView.setText(
-                    "Created: " + Util.formatDateAndTime(note.getCreationDate())
+                    getString(R.string.createdDate, Util.formatDateAndTime(note.getCreationDate()))
             );
             binding.noteUpdateDateTextView.setText(
-                    "Updated: " + Util.formatDateAndTime(note.getUpdateDate())
+                    getString(R.string.updatedDate, Util.formatDateAndTime(note.getUpdateDate()))
             );
         }
     }
