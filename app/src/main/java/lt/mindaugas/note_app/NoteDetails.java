@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import lt.mindaugas.note_app.databinding.ActivityNoteDetailsBinding;
 import lt.mindaugas.note_app.local_repository.MainDatabase;
+import lt.mindaugas.note_app.util.Util;
 
 public class NoteDetails extends AppCompatActivity {
 
@@ -93,17 +94,14 @@ public class NoteDetails extends AppCompatActivity {
             binding.noteTitleEditText.setText(note.getTitle());
             binding.noteDescriptionEditText.setText(note.getDescription());
             binding.noteCreationDateTextView.setText(
-                    "Created: " + displayDate(note.getCreationDate())
+                    "Created: " + Util.formatDateAndTime(note.getCreationDate())
             );
             binding.noteUpdateDateTextView.setText(
-                    "Updated: " + displayDate(note.getUpdateDate())
+                    "Updated: " + Util.formatDateAndTime(note.getUpdateDate())
             );
         }
     }
 
-    private String displayDate(LocalDateTime date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return date != null ? date.format(formatter) : "no data";
-    }
+
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 import lt.mindaugas.note_app.Note;
 import lt.mindaugas.note_app.R;
+import lt.mindaugas.note_app.util.Util;
 
 public class NoteAdapter extends ArrayAdapter<Note> {
     private final LayoutInflater inflater;
@@ -41,7 +42,9 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         if (note != null){
             holder.id.setText(String.valueOf(note.getId()));
             holder.title.setText(note.getTitle());
-            holder.updateDate.setText(note.getUpdateDate().toString());
+            holder.updateDate.setText(
+                    "Updated: " + Util.formatDateAndTime(note.getUpdateDate())
+            );
         }
 
         return convertView;
