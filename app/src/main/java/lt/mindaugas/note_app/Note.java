@@ -30,9 +30,9 @@ public class Note {
     private String title;
     @ColumnInfo(name = "description")
     private String description;
-    @Ignore
+    @ColumnInfo(name = "creation_date")
     private LocalDateTime creationDate;
-    @Ignore
+    @ColumnInfo(name = "update_date")
     private LocalDateTime updateDate;
 
     public Note(String title, String description) {
