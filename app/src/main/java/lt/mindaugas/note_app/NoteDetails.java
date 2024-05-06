@@ -21,12 +21,26 @@ public class NoteDetails extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         int noteId = getIntent().getIntExtra(MainActivity.INTENT_NOTE_ID, -1);
-        Note note = MainDatabase.getInstance().noteDao().getById(noteId);
+
+        Note note = fetchNoteById(noteId);
 
         displayNoteDetails(note);
         clickOnButtonCancel();
         clickOnButtonDelete(note);
-        clickOnButtonSave();
+        clickOnButtonSave(note);
+    }
+
+    private Note fetchNoteById(int noteId){
+
+        if (noteId <= 0) return new Note();
+
+        Note note = MainDatabase.getInstance().noteDao().getById(noteId);
+
+        if (note == null){
+            note = new Note();
+        }
+
+        return note;
     }
 
     private void clickOnButtonCancel() {
@@ -46,12 +60,30 @@ public class NoteDetails extends AppCompatActivity {
         );
     }
 
-    private void clickOnButtonSave() {
+    private void clickOnButtonSave(Note note) {
         binding.saveButton.setOnClickListener(
                 view -> {
-
+                    if (note.getId() > 0) {
+                        note.setTitle(binding.noteTitleEditText.getText().toString());
+                        note.setDescription(binding.noteDescriptionEditText.getText().toString());
+//                        binding.noteUpdateDateTextView.setText(
+//                                "Updated: " + displayDate(note.getUpdateDate())
+//                        );
+                        saveNoteAndCloseActivity(note);
+                    } else {
+                        Note newNote = new Note(
+                                binding.noteTitleEditText.getText().toString(),
+                                binding.noteDescriptionEditText.getText().toString()
+                        );
+                        saveNoteAndCloseActivity(newNote);
+                    }
                 }
         );
+    }
+
+    private void saveNoteAndCloseActivity(Note note) {
+        MainDatabase.getInstance().noteDao().insertNote(note);
+        finish();
     }
 
     private void displayNoteDetails(Note note) {

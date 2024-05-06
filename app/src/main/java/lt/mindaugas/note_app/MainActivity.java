@@ -83,9 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void clickOnFab() {
         binding.addNoteButton.setOnClickListener(
-                view -> Toast
-                        .makeText(this, "Hello", Toast.LENGTH_LONG)
-                        .show()
+                view -> {
+                    Intent intent = new Intent(MainActivity.this, NoteDetails.class);
+                    startActivity(intent);
+                }
         );
     }
 
